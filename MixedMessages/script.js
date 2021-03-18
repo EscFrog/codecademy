@@ -1,4 +1,4 @@
-const quoteList = [
+const defaultQuotes = [
     {
         quote: "The Best Way To Get Started Is To Quit Talking And Begin Doing.",
         speaker: "Walt Disney"
@@ -225,11 +225,26 @@ const quoteList = [
     },
 ];
 
-const generateRandMessage = (quotes) => {
+const fs = require('fs');
+const dataPath = 'quotes.json';
+
+const generateRandQuote = (quotes) => {
     const randomID = Math.floor(Math.random() * quotes.length);
     const randomQuote = quotes[randomID];
-    console.log(`today's quote:\n${randomQuote.quote}\n  - ${randomQuote.speaker}`);
+    console.log(`today's quote:\n>    ${randomQuote.quote}\n>    - ${randomQuote.speaker}`);
+};
 
-}
+const init = () => {
+    if (!fs.existsSync(dataPath)) {
+        // write quotes.json file
+        const dataJSON = JSON.stringify(defaultQuotes);
+        fs.writeFileSync(dataPath, dataJSON);
+    } else {
+        // read quotes.json file
+        const dataJSON = fs.readFileSync(dataPath).toString();
+        const data = JSON.parse(dataJSON);
+        generateRandQuote(data);
+    };
+};
 
-generateRandMessage(quoteList);
+init();
