@@ -2,15 +2,12 @@ body {
     font-family: Helvetica;
 }
 
-header {
-    background-image: url("/images/pattern.webp");
-}
-
 h1 {
     font-size: 100px;
     font-weight: bold;
     color: khaki;
     text-align: center;
+    background-image: url("images/pattern.webp");
 }
 
 h2 {
